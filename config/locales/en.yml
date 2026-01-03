@@ -28,4 +28,31 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      book:
+        title: 'Title'
+        memo: 'Details'
+        author: 'Author'
+        picture: 'Image'
+  common:
+    back: 'Back to books'
+  actions:
+    show: 'Show'
+    delete: 'Delete'
+    edit: 'Edit'
+  flash:
+    books:
+      created: 'Book created successfully.'
+      updated: 'Book updated successfully.'
+      deleted: 'Book deleted successfully.'
+  books:
+    index:
+      title: 'Book List'
+      new: 'New Book'
+    edit:
+      title: 'Edit Book'
+      show_book: 'Show Book'
+    new:
+      title: 'New Book'
+

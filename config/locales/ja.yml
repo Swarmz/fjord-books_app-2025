@@ -1,0 +1,28 @@
+ja:
+  activerecord:
+    attributes:
+      book:
+        title: 'タイトル'
+        memo: '詳細'
+        author: '著者'
+        picture: '画像'
+  common:
+    back: '一覧へ戻る'
+  actions:
+    show: '表示'
+    delete: '削除'
+    edit: '編集'
+  flash:
+    books:
+      created: '本を作成しました。'
+      updated: '本を更新しました。'
+      deleted: '本を削除しました。'
+  books:
+    index:
+      title: '本一覧'
+      new: '新規作成'
+    edit:
+      title: '本を編集'
+      show_book: '本を表示'
+    new:
+      title: '本の新規作成'
