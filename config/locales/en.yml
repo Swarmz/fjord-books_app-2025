@@ -29,6 +29,8 @@
 
 en:
   activerecord:
+    models:
+      book: 'Book'
     attributes:
       book:
         title: 'Title'
@@ -42,10 +44,9 @@ en:
     delete: 'Delete'
     edit: 'Edit'
   flash:
-    books:
-      created: 'Book created successfully.'
-      updated: 'Book updated successfully.'
-      deleted: 'Book deleted successfully.'
+    created: '%{model} created successfully.'
+    updated: '%{model} updated successfully.'
+    deleted: '%{model} deleted successfully.'
   books:
     index:
       title: 'Book List'
@@ -55,4 +56,3 @@ en:
       show_book: 'Show Book'
     new:
       title: 'New Book'
-

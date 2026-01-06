@@ -1,5 +1,7 @@
 ja:
   activerecord:
+    models:
+      book: '本'
     attributes:
       book:
         title: 'タイトル'
@@ -13,10 +15,9 @@ ja:
     delete: '削除'
     edit: '編集'
   flash:
-    books:
-      created: '本を作成しました。'
-      updated: '本を更新しました。'
-      deleted: '本を削除しました。'
+    created: '%{model}を作成しました。'
+    updated: '%{model}を更新しました。'
+    deleted: '%{model}を削除しました。'
   books:
     index:
       title: '本一覧'
