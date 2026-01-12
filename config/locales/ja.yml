@@ -201,8 +201,15 @@ ja:
       previous: '‹ 前'
       next: '次 ›'
       truncate: '…'
+    navigation:
+      logout: ログアウト
+    users:
+      show:
+        edit_info: 登録情報を編集
+
   controllers:
     common:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
+      not_authorized: "このページにアクセスする権限がありません。" 
