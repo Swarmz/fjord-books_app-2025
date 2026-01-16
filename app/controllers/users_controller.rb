@@ -2,14 +2,12 @@
 
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: %i[show edit update]
-  before_action :user_authorization, only: %i[edit update]
+  before_action :set_user, only: %i[show update]
   def index
     @users = User.order(:id).page(params[:page])
   end
 
   def show; end
-  def edit; end
 
   def update
     respond_to do |format|
@@ -31,15 +29,5 @@ class UsersController < ApplicationController
 
   def user_params
     params.expect(user: %i[email address postal_code self_introduction])
-  end
-
-  # Prevents users from accessing or modifying other users' pages with URL tampering (/users/{another_user}/edit)
-  def user_authorization
-    return if @user == current_user
-
-    redirect_back(
-      fallback_location: root_path,
-      alert: t('controllers.common.not_authorized')
-    )
   end
 end

@@ -1,4 +1,7 @@
-<h2><%= t('.title', default: t('devise.registrations.edit.title', default: 'Edit account')) %></h2>
+<% title = t('views.common.title_edit', name: User.model_name.human.downcase) %>
+<% content_for :title, title %>
+
+<h1><%= title %></h1>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -25,7 +28,7 @@
 
   <div class="field">
     <%= f.label :password %>
-    <i>(<%= t('devise.registrations.edit.leave_blank_if_you_dont_want_to_change_it', default: 'leave blank if you don’t want to change it') %>)</i><br />
+    <i>(<%= t('devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it', default: 'leave blank if you don’t want to change it') %>)</i><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
@@ -54,4 +57,7 @@
               data: { confirm: t('devise.registrations.edit.are_you_sure', default: 'Are you sure?') },
               method: :delete %>
 
-<%= link_to t('devise.shared.links.back', default: 'Back'), :back %>
+<nav class="page-nav">
+  <%= link_to t('views.common.show', name: User.model_name.human.downcase), @user %> |
+  <%= link_to t('views.common.back', name: i18n_pluralize(User.model_name.human.downcase)), users_path %>
+</nav>
