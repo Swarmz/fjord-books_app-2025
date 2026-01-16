@@ -203,6 +203,7 @@ ja:
       truncate: '…'
     navigation:
       logout: ログアウト
+      profile_page: マイページ
     users:
       show:
         edit_info: 登録情報を編集
@@ -212,4 +213,3 @@ ja:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
-      not_authorized: "このページにアクセスする権限がありません。" 
