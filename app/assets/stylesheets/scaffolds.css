@@ -319,3 +319,11 @@ form input[type="submit"] {
 form input[type="submit"]:hover {
   background-color: var(--global-primary-c-hover);
 }
+
+.notice {
+  color: green;
+}
+
+.alert {
+  color: red;
+}
