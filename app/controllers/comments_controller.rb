@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
-      redirect_to @commentable, alert: t('views.common.validation_error', name: Comment.model_name.human, errors: @comment.errors.full_messages.to_sentence)
+      redirect_to @commentable, alert: @comment.errors.full_messages.to_sentence
     end
   end
 
