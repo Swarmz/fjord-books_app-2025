@@ -24,27 +24,18 @@ class ReportsController < ApplicationController
 
   def create
     @report = current_user.reports.new(report_params)
-
-    respond_to do |format|
-      if @report.save
-        format.html { redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human) }
-        format.json { render :show, status: :created, location: @report }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @report.errors, status: :unprocessable_entity }
-      end
+    if @report.save
+      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    respond_to do |format|
-      if @report.update(report_params)
-        format.html { redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human) }
-        format.json { render :show, status: :ok, location: @report }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @report.errors, status: :unprocessable_entity }
-      end
+    if @report.update(report_params)
+      redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
