@@ -1,0 +1,17 @@
+<div class="comments-container">
+  <% if report.mentioned_reports.any? %>
+    <p>🔗 <%= t('application.reports.backlinks_title') %> 🔗<br></p>
+    <% report.mentioned_reports.each do |source_report| %>
+      <%= link_to user_path(source_report.user) do %>
+        <% if source_report.user.avatar.attached? %>
+          <%= image_tag source_report.user.avatar.variant(resize_to_fill: [16, 16]) %>
+          <% else %>
+            👤
+          <% end %>
+      <% end %>
+      <strong><%= link_to source_report.title, report_path(source_report) %></strong>
+      <small><%= l source_report.created_on %></small><br>
+    <% end %>
+    <hr>
+  <% end %>
+</div>
