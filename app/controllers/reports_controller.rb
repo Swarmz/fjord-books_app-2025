@@ -5,12 +5,7 @@ class ReportsController < ApplicationController
   before_action :authorize_report!, only: %i[edit update destroy]
 
   def index
-    if params[:user_id]
-      @user = User.find(params[:user_id])
-      @reports = @user.reports.includes(:user).order(id: :desc).page(params[:page])
-    else
-      @reports = Report.includes(:user).order(id: :desc).page(params[:page])
-    end
+    @reports = Report.includes(:user).order(id: :desc).page(params[:page])
   end
 
   def show

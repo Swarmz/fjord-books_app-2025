@@ -5,9 +5,7 @@ Rails.application.routes.draw do
     resources :comments, only: %i(new create edit update destroy)
   end
   root to: 'books#index'
-  resources :users, only: %i(index show) do
-    resources :reports, only: %i(index)
-  end
+  resources :users, only: %i(index show)
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
