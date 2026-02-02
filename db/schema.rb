@@ -80,7 +80,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_02_060114) do
     t.string "postal_code"
     t.string "address"
     t.text "self_introduction"
-    t.string "time_zone", default: "UTC", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
