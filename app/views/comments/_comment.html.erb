@@ -1,6 +1,5 @@
 <div id="<%= dom_id comment %>">
     <div class='show-item'>
-        <%# user.name is not a required field on sign-up %>
         <p>
             <strong><%= link_to comment.user.name.presence || comment.user.email, comment.user %></strong>
         </p>
