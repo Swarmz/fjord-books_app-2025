@@ -3,6 +3,7 @@
 class CommentsController < ApplicationController
   before_action :set_commentable, only: %i[create edit update destroy]
   before_action :set_comment, only: %i[show edit update destroy]
+  before_action :authorize_comment!, only: %i[edit update destroy]
 
   def show; end
 
@@ -31,9 +32,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    authorize_user!(@comment)
-    return if performed?
-
     @comment.destroy!
     redirect_to @commentable, status: :see_other, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
@@ -56,5 +54,9 @@ class CommentsController < ApplicationController
     else
       raise ActionController::RoutingError, 'Not Found'
     end
+  end
+
+  def authorize_comment!
+    current_user.comments.find(@comment.id)
   end
 end

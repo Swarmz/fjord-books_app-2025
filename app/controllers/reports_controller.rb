@@ -2,6 +2,7 @@
 
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
+  before_action :authorize_report!, only: %i[edit update destroy]
 
   def index
     if params[:user_id]
@@ -40,9 +41,6 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    authorize_user!(@report)
-    return if performed?
-
     @report.destroy!
     redirect_to reports_path, status: :see_other, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
   end
@@ -55,5 +53,9 @@ class ReportsController < ApplicationController
 
   def report_params
     params.expect(report: %i[title content])
+  end
+
+  def authorize_report!
+    current_user.reports.find(@report.id)
   end
 end
