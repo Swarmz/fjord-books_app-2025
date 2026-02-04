@@ -2,7 +2,7 @@
 
 class CommentsController < ApplicationController
   before_action :set_commentable, only: %i[create edit update destroy]
-  before_action :set_comment, only: %i[show edit update destroy]
+  before_action :set_comment, only: %i[show]
   before_action :authorize_comment!, only: %i[edit update destroy]
 
   def show; end
@@ -57,6 +57,6 @@ class CommentsController < ApplicationController
   end
 
   def authorize_comment!
-    current_user.comments.find(@comment.id)
+    @comment = current_user.comments.find(params[:id])
   end
 end

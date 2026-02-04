@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ReportsController < ApplicationController
-  before_action :set_report, only: %i[show edit update destroy]
+  before_action :set_report, only: %i[show]
   before_action :authorize_report!, only: %i[edit update destroy]
 
   def index
@@ -51,6 +51,6 @@ class ReportsController < ApplicationController
   end
 
   def authorize_report!
-    current_user.reports.find(@report.id)
+    @report = current_user.reports.find(params[:id])
   end
 end
