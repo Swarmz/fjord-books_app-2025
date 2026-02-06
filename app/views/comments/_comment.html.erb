@@ -1,0 +1,22 @@
+<div id="<%= dom_id comment %>">
+    <div class='show-item'>
+        <p>
+            <strong><%= link_to comment.user.name.presence || comment.user.email, comment.user %></strong>
+        </p>
+
+        <p>
+            <time><%= l comment.created_at, format: :long %></time>
+        </p>
+
+        <p>
+            <%= comment.body %>
+        </p>
+
+        <% if current_user == comment.user %>
+            <p>
+                <%= link_to t('views.common.edit', name: Comment.model_name.human.downcase), edit_polymorphic_path([comment.commentable, comment]) %>
+                <%= button_to t('views.common.destroy', name: Comment.model_name.human.downcase), polymorphic_path([comment.commentable, comment]), method: :delete %>
+            </p>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<%= form_with model: [commentable, comment] do |form| %>
+
+  <%= render "shared/errors", object: comment %>
+
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body, required: true %>
+  </div>
+
+  <%= form.submit %>
+<% end %>
