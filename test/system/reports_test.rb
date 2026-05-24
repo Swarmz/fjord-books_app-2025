@@ -17,22 +17,25 @@ class ReportsTest < ApplicationSystemTestCase
     visit reports_url
     click_on '日報の新規作成'
 
-    fill_in '内容', with: @report.content
-    fill_in 'タイトル', with: @report.title
+    fill_in '内容', with: 'Hi, my name is Bob.'
+    fill_in 'タイトル', with: 'Bobs Report'
     click_on '登録する'
 
     assert_text '日報が作成されました。'
+    assert_text 'Bobs Report'
   end
 
   test 'should update Report' do
     visit report_url(@report)
     click_on 'この日報を編集', match: :first
 
-    fill_in '内容', with: @report.content
-    fill_in 'タイトル', with: @report.title
+    fill_in '内容', with: 'Today was a good day'
+    fill_in 'タイトル', with: 'Bobs Updated Report'
     click_on '更新する'
 
     assert_text '日報が更新されました。'
+    assert_text 'Bobs Updated Report'
+    assert_text 'Today was a good day'
   end
 
   test 'should destroy Report' do

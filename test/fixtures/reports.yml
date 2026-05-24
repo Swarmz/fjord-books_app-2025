@@ -4,23 +4,22 @@ bobs_report:
   id: 0
   user_id: 0
   title: 'Bobs Report'
-  content: 'Hi, my name is Bob.'
+  content: 'Example text.'
 
 alices_report:
   id: 1
   user_id: 1
   title: 'Alices Report'
-  content: 'Hi, my name is Alice.'
+  content: 'Example text.'
 
 mentioned_report:
   id: 2
   user_id: 0
-  title: 'How to program'
+  title: 'Mentioned Report'
   content: 'Example text.'
 
 mentioning_report:
   id: 3
   user_id: 1
-  title: 'Check this out.'
-  content: 'I found a useful report here: http://localhost:3000/reports/2'
-
+  title: 'Mentioning Report'
+  content: 'Example text.'
