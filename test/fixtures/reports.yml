@@ -1,25 +1,18 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-bobs_report:
+one:
   id: 0
   user_id: 0
-  title: 'Bobs Report'
+  title: 'Report One'
   content: 'Example text.'
 
-alices_report:
+two:
   id: 1
   user_id: 1
-  title: 'Alices Report'
+  title: 'Report Two'
   content: 'Example text.'
 
-mentioned_report:
+three:
   id: 2
   user_id: 0
-  title: 'Mentioned Report'
-  content: 'Example text.'
-
-mentioning_report:
-  id: 3
-  user_id: 1
-  title: 'Mentioning Report'
+  title: 'Report Three'
   content: 'Example text.'

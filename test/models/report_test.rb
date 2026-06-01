@@ -3,19 +3,28 @@
 require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
-  setup do
-    @mentioning_report = reports(:mentioning_report)
-    @mentioned_report = reports(:mentioned_report)
-  end
-
   test 'can edit their own report' do
     user = users(:bob)
-    assert_equal true, reports(:bobs_report).editable?(user)
+    report = Report.new(
+      user: user,
+      title: 'Bobs Report',
+      content: 'Today was a good day'
+    )
+
+    assert report.editable?(user)
   end
 
   test 'cannot edit another users reports' do
     user = users(:alice)
-    assert_equal false, reports(:bobs_report).editable?(user)
+    another_user = users(:bob)
+
+    report = Report.new(
+      user: user,
+      title: 'Alices Report',
+      content: 'Today was a bad day'
+    )
+
+    assert_not report.editable?(another_user)
   end
 
   test 'created_on returns date only' do
@@ -25,42 +34,56 @@ class ReportTest < ActiveSupport::TestCase
   end
 
   test 'mentioned report is saved as a mention' do
-    @mentioning_report.update!(
-      content: "I found a useful report here: http://localhost:3000/reports/#{@mentioned_report.id}"
+    report = reports(:one)
+    mentioned_report = reports(:two)
+
+    report.update!(
+      content: "I found a useful report here: http://localhost:3000/reports/#{mentioned_report.id}"
     )
-    assert_includes @mentioning_report.mentioning_reports, @mentioned_report
+    assert_includes report.mentioning_reports, mentioned_report
   end
 
   test 'report does not create mention for self' do
-    @mentioning_report.update!(
-      content: "http://localhost:3000/reports/#{@mentioning_report.id}"
+    report = reports(:one)
+
+    report.update!(
+      content: "http://localhost:3000/reports/#{report.id}"
     )
-    assert_not_includes @mentioning_report.mentioning_reports, @mentioning_report
+    assert_not_includes report.mentioning_reports, report
   end
 
   test 'mention is removed from report' do
-    @mentioning_report.update!(
-      content: "http://localhost:3000/reports/#{@mentioned_report.id}"
-    )
-    assert_includes @mentioning_report.mentioning_reports, @mentioned_report
+    report = reports(:one)
+    mentioned_report = reports(:two)
 
-    @mentioning_report.update!(
+    report.update!(
+      content: "http://localhost:3000/reports/#{mentioned_report.id}"
+    )
+    assert_includes report.mentioning_reports, mentioned_report
+
+    report.update!(
       content: 'Mention removed.'
     )
-    updated_mentions = @mentioning_report.mentioning_reports.reload
-    assert_not_includes updated_mentions, @mentioned_report
+    updated_mentions = report.mentioning_reports.reload
+    assert_not_includes updated_mentions, mentioned_report
   end
 
-  test 'replaces old mentions with new ones' do
-    @mentioning_report.update!(
-      content: "I found a useful report here: http://localhost:3000/reports/#{@mentioned_report.id}"
+  test 'replaces old mention with new mention' do
+    report = reports(:one)
+    mentioned_report = reports(:two)
+
+    report.update!(
+      content: "I found a useful report here: http://localhost:3000/reports/#{mentioned_report.id}"
     )
-    assert_includes @mentioning_report.mentioning_reports, @mentioned_report
+    assert_includes report.mentioning_reports, mentioned_report
 
-    @mentioning_report.update!(content: "http://localhost:3000/reports/#{reports(:alices_report).id}")
-    updated_mentions = @mentioning_report.mentioning_reports.reload
+    new_mention = reports(:three)
+    report.update!(
+      content: "http://localhost:3000/reports/#{new_mention.id}"
+    )
+    updated_mentions = report.mentioning_reports.reload
 
-    assert_includes updated_mentions, reports(:alices_report)
-    assert_not_includes updated_mentions, @mentioned_report
+    assert_includes updated_mentions, new_mention
+    assert_not_includes updated_mentions, mentioned_report
   end
 end
